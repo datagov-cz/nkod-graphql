@@ -1,0 +1,22 @@
+{
+  "name": "nkod-graphql",
+  "version": "1.0.0-alpha.0",
+  "description": "Provide GraphQL access to NKOD JSON data.",
+  "private": true,
+  "author": "",
+  "scripts": {
+    "start": "node --max-old-space-size=4096 server/server.js",
+    "lint": "eslint --ext .js,.jsx --ignore-path .gitignore . --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.4.0",
+    "npm-check-updates": "^9.2.4",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0"
+  }
+}
