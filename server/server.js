@@ -33,7 +33,7 @@ function addMaintenanceApi(app) {
   const router = express.Router();
   if (configuration.reloadToken !== undefined
     && configuration.reloadToken !== "") {
-    router.post("/reload", onReload);
+    router.get("/reload", onReload);
   } else {
     logger.info("Reload disabled.")
   }
