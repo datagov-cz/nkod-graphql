@@ -11,7 +11,7 @@ let DATABASE = {
 function setDatabaseData(data) {
   DATABASE = data;
   //
-  logger.error("New database data.", {
+  logger.info("New database data.", {
     "datasetCount": DATABASE.datasets.length,
     "publisherCount": DATABASE.publishers.length,
     "distributionCount": DATABASE.distributions.length,
