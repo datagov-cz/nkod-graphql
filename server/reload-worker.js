@@ -6,10 +6,10 @@ const configuration = require("./configuration");
 /**
  * Implements database reload functionality.
  */
-(function work() {
+(async function work() {
   let database;
   try {
-    database = loadData(configuration.nkodFile);
+    database = await loadData(configuration.nkodFile);
   } catch (error) {
     logger.error("Can't load database for first time.", {"error": error.stack});
     // We still want the server to start and for example wait for reload.

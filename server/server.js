@@ -11,11 +11,11 @@ const reload = require("./reload");
 // We allow only one reload at a time.
 let reloadInProgress = false;
 
-(function initializeServer() {
+(async function initializeServer() {
   const app = express();
   addGraphQlApi(app);
   addMaintenanceApi(app);
-  initializeDatabase()
+  await initializeDatabase()
   startServer(app);
 })();
 
@@ -61,9 +61,9 @@ async function onReload(req, res) {
   res.send("");
 }
 
-function initializeDatabase() {
+async function initializeDatabase() {
   try {
-    const database = loadData(configuration.nkodFile);
+    const database = await loadData(configuration.nkodFile);
     setDatabaseData(database);
   } catch (error) {
     logger.error("Can't load database for first time.", {"error": error.stack});
