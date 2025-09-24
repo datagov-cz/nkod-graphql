@@ -5,15 +5,17 @@ const JsonStream = require('JSONStream')
 async function loadData(filePath) {
   logger.info("Loading data ...");
 
-  const stream = fs.createReadStream(filePath)
-      .pipe(JsonStream.parse("*"));
-
   return new Promise((accept, reject) => {
+    const stream = fs.createReadStream(filePath);
+    stream.on("error", reject);
+    const jsonStream = read.pipe(JsonStream.parse("*"));
+    jsonStream.on("error", reject);
+
     const newDatasets = [];
     const newPublishers = {};
     const newDistributions = {};
 
-    stream.on("data", function(dataset) {
+    jsonStream.on("data", (dataset) => {
       // Extract publisher.
       const publisher = dataset["publisher"];
       newPublishers[publisher["iri"]] = publisher;
@@ -27,16 +29,14 @@ async function loadData(filePath) {
       newDatasets.push(dataset);
     });
 
-    stream.on("end", function() {
-      logger.info("Data ready.");
+    jsonStream.on("end", ()  => {
+      logger.info("Data ready.", {datasets: newDatasets.length});
       accept({
         "datasets": newDatasets,
         "publishers": newPublishers,
         "distributions": newDistributions,
       });
     });
-
-    stream.on("error", reject);
 
   });
 }

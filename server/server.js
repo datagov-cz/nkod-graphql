@@ -66,7 +66,7 @@ async function initializeDatabase() {
     const database = await loadData(configuration.nkodFile);
     setDatabaseData(database);
   } catch (error) {
-    logger.warning("Can't load database for first time. Starting with no data.");
+    logger.warn("Can't load database for first time. Starting with no data.");
   }
 }
 
