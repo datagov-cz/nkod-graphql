@@ -66,8 +66,8 @@ async function initializeDatabase() {
     const database = await loadData(configuration.nkodFile);
     setDatabaseData(database);
   } catch (error) {
-    logger.error("Can't load database for first time.", {"error": error.stack});
-    // We still want the server to start and for example wait for reload.
+    logger.warning("Can't load database for first time. Starting with no data.",
+      {"error": error.stack});
   }
 }
 
