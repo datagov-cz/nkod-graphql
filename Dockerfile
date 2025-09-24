@@ -1,4 +1,4 @@
-FROM node:15.3.0-slim
+FROM node:24.8.0-slim
 
 WORKDIR /opt/nkod-graphql
 
