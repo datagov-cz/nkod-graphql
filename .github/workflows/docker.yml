@@ -23,7 +23,7 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v3
         with:
-          context: ./docker/graphql/
+          context: ./
           push: true
           tags: ghcr.io/datagov-cz/nkod-graphql:${{ github.ref_name }}
           cache-from: type=gha
