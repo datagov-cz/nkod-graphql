@@ -19,7 +19,7 @@ function reload() {
     });
     worker.on("exit", (code) => {
       if (code === 0) {
-        logger.error("Reload finished.");
+        logger.info("Reload finished.");
         accept();
       } else {
         logger.error("Reload failed.", {"code": code});
