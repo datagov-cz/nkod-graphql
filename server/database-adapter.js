@@ -8,7 +8,7 @@ async function loadData(filePath) {
   return new Promise((accept, reject) => {
     const stream = fs.createReadStream(filePath);
     stream.on("error", reject);
-    const jsonStream = read.pipe(JsonStream.parse("*"));
+    const jsonStream = stream.pipe(JsonStream.parse("*"));
     jsonStream.on("error", reject);
 
     const newDatasets = [];
