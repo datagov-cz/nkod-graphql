@@ -7,12 +7,12 @@ const configuration = require("./configuration");
  * Implements database reload functionality.
  */
 (async function work() {
-  let database;
   try {
-    database = await loadData(configuration.nkodFile);
+    const database = await loadData(configuration.nkodFile);
+    // We set the state only on success.
+    parentPort.postMessage({"data": database})
   } catch (error) {
-    logger.error("Can't load database for first time.", {"error": error.stack});
+    logger.error("Can't load database.", {"error": error.stack});
     // We still want the server to start and for example wait for reload.
   }
-  parentPort.postMessage({"data": database})
 })();
