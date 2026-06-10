@@ -153,6 +153,9 @@ const datasetType = new graphql.GraphQLObjectType({
     "spatialResolutionInMeters": {"type": graphql.GraphQLFloat},
     "temporalResolution": {"type": graphql.GraphQLString},
     "isPartOf": {"type": graphql.GraphQLString},
+    "isvs": {
+      "type": graphql.GraphQLList(graphql.GraphQLString),
+    },
     "distribution": {
       "type": graphql.GraphQLList(distributionType),
       "args": {
