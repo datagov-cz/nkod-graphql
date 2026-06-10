@@ -154,7 +154,7 @@ const datasetType = new graphql.GraphQLObjectType({
     "temporalResolution": {"type": graphql.GraphQLString},
     "isPartOf": {"type": graphql.GraphQLString},
     "isvs": {
-      "type": graphql.GraphQLList(graphql.GraphQLString),
+      "type": graphql.GraphQLString,
     },
     "distribution": {
       "type": graphql.GraphQLList(distributionType),
