@@ -30,6 +30,7 @@ const contactPointType = new graphql.GraphQLObjectType({
   "fields": {
     "name": {"type": textType},
     "email": {"type": graphql.GraphQLString},
+    "contactPage": {"type": graphql.GraphQLString},
   },
 });
 
@@ -42,6 +43,18 @@ const termsOfUse = new graphql.GraphQLObjectType({
     "database_author": {"type": textType},
     "sui_generis_database_rights": {"type": graphql.GraphQLString},
     "personal_data": {"type": graphql.GraphQLString},
+    "exactMatch": {"type": graphql.GraphQLString},
+    "narrowMatch": {"type": graphql.GraphQLString},
+  },
+});
+
+const zprostredkovavaSdileniType = new graphql.GraphQLObjectType({
+  "name": "ZprostredkovavaSdileni",
+  "fields": {
+    "jeSdilenJako": {"type": graphql.GraphQLString},
+    "jeSdilenZpusobem": {"type": graphql.GraphQLString},
+    "jeZiskanZpusobem": {"type": graphql.GraphQLString},
+    "odpovidajiciPojem": {"type": graphql.GraphQLString},
   },
 });
 
@@ -52,6 +65,11 @@ const dataService = new graphql.GraphQLObjectType({
     "title": {"type": textType},
     "endpointURL": {"type": graphql.GraphQLString},
     "endpointDescription": {"type": graphql.GraphQLString},
+    "conformsTo": {"type": graphql.GraphQLString},
+    "documentation": {"type": graphql.GraphQLString},
+    "contactPoint": {"type": contactPointType},
+    "hvdCategory": {"type": graphql.GraphQLList(graphql.GraphQLString)},
+    "applicableLegislation": {"type": graphql.GraphQLList(graphql.GraphQLString)},
   },
 });
 
@@ -61,9 +79,15 @@ const distributionType = new graphql.GraphQLObjectType({
     "iri": {"type": graphql.GraphQLID},
     "termsOfUse": {"type": termsOfUse}, // podmínky_užití
     "accessURL": {"type": graphql.GraphQLString},
+    "downloadURL": {"type": graphql.GraphQLString},
     "format": {"type": graphql.GraphQLString},
     "mediaType": {"type": graphql.GraphQLString},
     "conformsTo": {"type": graphql.GraphQLString},
+    "applicableLegislation": {"type": graphql.GraphQLList(graphql.GraphQLString)},
+    "maTypObsahuSdilenehoRozhranim": {"type": graphql.GraphQLList(graphql.GraphQLString)},
+    "maZpusobSdileniRozhranim": {"type": graphql.GraphQLString},
+    "maZpusobZiskaniDatSdilenychRozhranim": {"type": graphql.GraphQLList(graphql.GraphQLString)},
+    "zprostredkovavaSdileni": {"type": zprostredkovavaSdileniType},
     "compressFormat": {"type": graphql.GraphQLString},
     "packageFormat": {"type": graphql.GraphQLString},
     "title": {"type": textType},
@@ -89,6 +113,9 @@ const datasetType = new graphql.GraphQLObjectType({
     "iri": {"type": graphql.GraphQLID},
     "title": {"type": textType},
     "description": {"type": textType},
+    "types": {
+      "type": graphql.GraphQLList(graphql.GraphQLString),
+    },
     "publisher": {
       "type": publisherType,
       "resolve": (source) => {
@@ -109,7 +136,19 @@ const datasetType = new graphql.GraphQLObjectType({
     "contactPoint": {"type": contactPointType},
     "documentation": {"type": graphql.GraphQLString}, // foaf:page
     "conformsTo": {
-      "type": graphql.GraphQLList(textType),
+      "type": graphql.GraphQLList(graphql.GraphQLString),
+    },
+    "tykaSePojmu": {
+      "type": graphql.GraphQLList(graphql.GraphQLString),
+    },
+    "applicableLegislation": {
+      "type": graphql.GraphQLList(graphql.GraphQLString),
+    },
+    "hvdCategory": {
+      "type": graphql.GraphQLList(graphql.GraphQLString),
+    },
+    "landingPage": {
+      "type": graphql.GraphQLList(graphql.GraphQLString),
     },
     "spatialResolutionInMeters": {"type": graphql.GraphQLFloat},
     "temporalResolution": {"type": graphql.GraphQLString},
